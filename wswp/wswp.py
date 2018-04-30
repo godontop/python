@@ -2,6 +2,7 @@
 import re
 import urllib.request
 import urllib.error
+import urllib.parse
 
 
 def download(url, user_agent='wswp', num_retries=2):
@@ -23,14 +24,15 @@ def download(url, user_agent='wswp', num_retries=2):
 def link_crawler(seed_url, link_regex):
     """Crawl from the given seed URL following links matched by link_regex
     """
-    crawl_quene = [seed_url]
-    while crawl_quene:
-        url = crawl_quene.pop()
+    crawl_queue = [seed_url]
+    while crawl_queue:
+        url = crawl_queue.pop()
         html = download(url)
         # filter for links matching our regular expression
         for link in get_links(html):
             if re.match(link_regex, link):
-                crawl_quene.append(link)
+                link = urllib.parse.urljoin(seed_url, link)
+                crawl_queue.append(link)
 
 
 def get_links(html):
