@@ -3,14 +3,21 @@ import re
 import urllib.request
 import urllib.error
 import urllib.parse
+import urllib.robotparser
 
 
-def download(url, user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', num_retries=2):
+user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36'
+rp = urllib.robotparser.RobotFileParser()
+rp.set_url('http://example.webscraping.com/robots.txt')
+rp.read()
+
+
+def download(url, user_agent=user_agent, num_retries=2):
     print('Downloading:', url)
     headers = {'User-agent': user_agent}
     request = urllib.request.Request(url, headers=headers)
     try:
-        html = urllib.request.urlopen(request).read()
+        html = urllib.request.urlopen(request).read().decode()
     except urllib.error.URLError as e:
         print('Download error:', e.reason)
         html = None
@@ -29,7 +36,12 @@ def link_crawler(seed_url, link_regex):
     seen = set(crawl_queue)
     while crawl_queue:
         url = crawl_queue.pop()
-        html = download(url)
+        # check url passes robots.txt restrictions
+        if rp.can_fetch(user_agent, url):
+            html = download(url)
+        else:
+            print('Blocked by robots.txt:', url)
+            html = None
         # filter for links matching our regular expression
         for link in get_links(html):
             # check if link matches expected regex
@@ -49,3 +61,6 @@ def get_links(html):
     webpage_regex = re.compile('<a[^>]+href=["\'](.*?)["\']', re.IGNORECASE)
     # list of all links from the webpage
     return webpage_regex.findall(html)
+
+
+link_crawler('http://example.webscraping.com', '/places/default/(index|view)')
