@@ -67,6 +67,6 @@ for name, scraper in [('Regular expressions', re_scraper), ('BeautifulSoup', bs_
         result = scraper(html)
         # check scraped result is as expected
         assert(result['area'] == '244,820 square kilometres')
-        # record end time of scrape and output the total
-        end = time.time()
-        print('%s: %.2f seconds' % (name, end - start))
+    # record end time of scrape and output the total
+    end = time.time()
+    print('%s: %.2f seconds' % (name, end - start))
