@@ -65,7 +65,7 @@ def download(url, user_agent='wswp', proxy=None, num_retries=2):
     return html
 
 
-def link_crawler(seed_url, link_regex, max_depth=2):
+def link_crawler(seed_url, link_regex, max_depth=2, scrape_callback=None):
     """Crawl from the given seed URL following links matched by link_regex
     """
     crawl_queue = [seed_url]
@@ -77,6 +77,9 @@ def link_crawler(seed_url, link_regex, max_depth=2):
         if rp.can_fetch(user_agent, url):
             throttle.wait(url)
             html = download(url, user_agent, proxy, 2)
+            links = []
+            if scrape_callback:
+                links.extend(scrape_callback(url, html) or [])
         else:
             print('Blocked by robots.txt:', url)
             html = None
@@ -102,6 +105,3 @@ def get_links(html):
     webpage_regex = re.compile('<a[^>]+href=["\'](.*?)["\']', re.IGNORECASE)
     # list of all links from the webpage
     return webpage_regex.findall(html)
-
-
-link_crawler('http://example.webscraping.com', '/places/default/(index|view)', 1)
