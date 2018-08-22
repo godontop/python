@@ -8,7 +8,7 @@ from link_crawler import link_crawler
 class DiskCache:
     def __init__(self, cache_dir='cache'):
         self.cache_dir = cache_dir
-        self.max_length = max_length
+        self.max_length = max_length2
 
     def __getitem__(self, url):
         """Load data from disk for this URL
