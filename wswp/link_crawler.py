@@ -39,8 +39,8 @@ class Throttle:
         # update the last accessed time
         self.domains[domain] = datetime.datetime.now()
 
-        
-throttle=Throttle(1)
+
+throttle = Throttle(1)
 
 
 def download(url, user_agent='wswp', proxy=None, num_retries=2):
@@ -65,18 +65,23 @@ def download(url, user_agent='wswp', proxy=None, num_retries=2):
     return html
 
 
-def link_crawler(seed_url, link_regex, max_depth=2, scrape_callback=None):
+def link_crawler(seed_url, link_regex, max_depth=2, scrape_callback=None, cache=None):
     """Crawl from the given seed URL following links matched by link_regex
     """
     crawl_queue = [seed_url]
     # keep track which URL's have seen before
     seen = {seed_url: 0}
+    num_urls = 0
+    rp = get_robots(seed_url)
+    D = Downloader(delay=delay, user_agent=user_agent, proxies=proxies,
+                   num_retries=num_retries, cache=cache)
     while crawl_queue:
         url = crawl_queue.pop()
+        depth = seen[url]
         # check url passes robots.txt restrictions
         if rp.can_fetch(user_agent, url):
             throttle.wait(url)
-            html = download(url, user_agent, proxy, 2)
+            html = D(url)
             links = []
             if scrape_callback:
                 links.extend(scrape_callback(url, html) or [])
@@ -85,7 +90,6 @@ def link_crawler(seed_url, link_regex, max_depth=2, scrape_callback=None):
             html = None
             sys.exit()
         # filter for links matching our regular expression
-        depth = seen[url]
         if depth != max_depth:
             for link in get_links(html):
                 # check if link matches expected regex
