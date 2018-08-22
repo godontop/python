@@ -66,7 +66,7 @@ def download(url, user_agent='wswp', proxy=None, num_retries=2):
     return html
 
 
-def link_crawler(seed_url, link_regex, delay=1, max_depth=2, scrape_callback=None, cache=None):
+def link_crawler(seed_url, link_regex, delay=1, max_depth=2, proxies=None, scrape_callback=None, cache=None):
     """Crawl from the given seed URL following links matched by link_regex
     """
     crawl_queue = [seed_url]
