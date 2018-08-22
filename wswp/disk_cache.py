@@ -2,6 +2,7 @@ import pickle
 import os
 import re
 import urllib.parse
+from link_crawler import link_crawler
 
 
 class DiskCache:
@@ -46,3 +47,7 @@ class DiskCache:
         # restric maximum number of characters
         filename = '/'.join(segment[:255] for segment in filename.split('/'))
         return os.path.join(self.cache_dir, filename)
+
+
+if __name__ == '__main__':
+    link_crawler('http://example.webscraping.com', '/places/default/(index|view)', cache=DiskCache())
