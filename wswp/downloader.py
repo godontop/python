@@ -37,8 +37,29 @@ class Downloader:
                 self.cache[url] = result
         return result['html']
 
-    def download(self, url, headers, proxy, num_retries, data=None):
-        pass
+    def download(self, url, headers, proxy, num_retries):
+        '''Support custom User-Agent, proxy and auto retry
+        '''
+        print('Downloading:', url)  # url is download function's first arguments
+        request = urllib.request.Request(url, headers=headers)
+        opener = urllib.request.build_opener()
+        if proxy:
+            proxy_params = {urllib.parse.urlparse(url).scheme: proxy}
+            opener.add_handler(urllib.request.ProxyHandler(proxy_params))
+        try:
+            response = opener.open(request)
+            html = response.read().decode()
+            code = response.code
+        except urllib.error.URLError as e:
+            print('Download error:', e.reason)
+            html = None
+            if num_retries > 0:
+                if hasattr(e, 'code') and 500 <= e.code < 600:
+                    # retry 5XX HTTP errors
+                    code = e.code
+                    html = self.download(url, headers, proxy, num_retries - 1)
+            else:
+                code = None
         return {'html': html, 'code': code}
 
 
