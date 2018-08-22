@@ -102,6 +102,15 @@ def link_crawler(seed_url, link_regex, max_depth=2, scrape_callback=None, cache=
                         crawl_queue.append(link)
 
 
+def get_robots(url):
+    """Initialize robots parser for this domain
+    """
+    rp = urllib.robotparser.RobotFileParser()
+    rp.set_url(urllib.parse.urljoin(url, '/robots.txt'))
+    rp.read()
+    return rp
+
+
 def get_links(html):
     """Return a list of links from html
     """
