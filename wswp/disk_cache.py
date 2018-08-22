@@ -40,6 +40,8 @@ class DiskCache:
             path = '/index.html'
         elif path.endswith('/'):
             path += 'index.html'
+        elif path.endswith('index'):
+            path += '.html'
         filename = components.netloc + path + components.query
         # replace invalid characters
         filename = re.sub('[^/0-9a-zA-Z\-.,; _]', '_', filename)
