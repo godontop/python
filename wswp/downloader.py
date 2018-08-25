@@ -4,9 +4,11 @@ import random
 import time
 
 
+DEFAULT_AGENT = 'wswp'
+
 class Downloader:
 
-    def __init__(self, delay=1, user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', proxies=None, num_retries=1, cache=None):
+    def __init__(self, delay=1, user_agent=DEFAULT_AGENT, proxies=None, num_retries=1, cache=None):
         self.throttle = Throttle(delay)
         self.user_agent = user_agent
         self.proxies = proxies
