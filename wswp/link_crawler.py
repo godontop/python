@@ -10,7 +10,7 @@ import sys
 from downloader import Downloader
 
 
-def link_crawler(seed_url, link_regex, delay=1, max_depth=2, proxies=None, num_retries=2, scrape_callback=None, cache=None):
+def link_crawler(seed_url, link_regex, delay=1, max_depth=2, user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36', proxies=None, num_retries=2, scrape_callback=None, cache=None):
     """Crawl from the given seed URL following links matched by link_regex
     """
     crawl_queue = [seed_url]
