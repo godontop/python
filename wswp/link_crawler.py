@@ -25,7 +25,6 @@ def link_crawler(seed_url, link_regex, delay=1, max_depth=2, user_agent='Mozilla
         depth = seen[url]
         # check url passes robots.txt restrictions
         if rp.can_fetch(user_agent, url):
-            throttle.wait(url)
             html = D(url)
             links = []
             if scrape_callback:
