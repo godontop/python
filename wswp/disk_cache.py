@@ -2,6 +2,7 @@ import pickle
 import os
 import re
 import urllib.parse
+import zlib
 from link_crawler import link_crawler
 
 
@@ -15,7 +16,7 @@ class DiskCache:
         path = self.url_to_path(url)
         if os.path.exists(path):
             with open(path, 'rb') as fp:
-                return pickle.load(fp)
+                return pickle.loads(zlib.decompress(fp.read()))
         else:
             # URL has not yet been cached
             raise KeyError(url + ' does not exist')
@@ -28,7 +29,7 @@ class DiskCache:
         if not os.path.exists(folder):
             os.makedirs(folder)
         with open(path, 'wb') as fp:
-            fp.write(pickle.dumps(result))
+            fp.write(zlib.compress(pickle.dumps(result)))
 
     def url_to_path(self, url):
         """Create file system path for this URL
