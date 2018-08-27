@@ -16,6 +16,8 @@ class Downloader:
         self.cache = cache
 
     def __call__(self, url):
+        """Return the request url's result (str)
+        """
         result = None
         if self.cache:
             try:
@@ -41,6 +43,7 @@ class Downloader:
 
     def download(self, url, headers, proxy, num_retries):
         '''Support custom User-Agent, proxy and auto retry
+        Return a dict (Return the request url's result and HTTP response code)
         '''
         print('Downloading:', url)  # url is download function's first arguments
         request = urllib.request.Request(url, headers=headers)

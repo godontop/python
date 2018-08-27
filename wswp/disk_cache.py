@@ -3,12 +3,14 @@ import os
 import re
 import urllib.parse
 import zlib
+from datetime import datetime, timedelta
 from link_crawler import link_crawler
 
 
 class DiskCache:
-    def __init__(self, cache_dir='cache'):
+    def __init__(self, cache_dir='cache', expires=timedelta(days=30)):
         self.cache_dir = cache_dir
+        self.expires = expires
 
     def __getitem__(self, url):
         """Load data from disk for this URL
@@ -16,7 +18,10 @@ class DiskCache:
         path = self.url_to_path(url)
         if os.path.exists(path):
             with open(path, 'rb') as fp:
-                return pickle.loads(zlib.decompress(fp.read()))
+                result, timestamp = pickle.loads(zlib.decompress(fp.read()))
+                if self.has_expired(timestamp):
+                    raise KeyError(url + ' has expired')
+                return result
         else:
             # URL has not yet been cached
             raise KeyError(url + ' does not exist')
@@ -29,7 +34,7 @@ class DiskCache:
         if not os.path.exists(folder):
             os.makedirs(folder)
         with open(path, 'wb') as fp:
-            fp.write(zlib.compress(pickle.dumps(result)))
+            fp.write(zlib.compress(pickle.dumps((result, datetime.utcnow()))))
 
     def url_to_path(self, url):
         """Create file system path for this URL
@@ -49,6 +54,11 @@ class DiskCache:
         # restric maximum number of characters
         filename = '/'.join(segment[:255] for segment in filename.split('/'))
         return os.path.join(self.cache_dir, filename)
+
+    def has_expired(self, timestamp):
+        """Return whether this timestamp has expired
+        """
+        return datetime.utcnow() > timestamp + self.expires
 
 
 if __name__ == '__main__':
