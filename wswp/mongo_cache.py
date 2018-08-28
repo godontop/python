@@ -3,6 +3,7 @@ import zlib
 from bson.binary import Binary
 from datetime import datetime, timedelta
 from pymongo import MongoClient
+from link_crawler import link_crawler
 
 
 class MongoCache:
@@ -30,5 +31,11 @@ class MongoCache:
     def __setitem__(self, url, result):
         """Save value for this URL
         """
-        record = {'result': Binary(zlib.compress(pickle.dumps(result))), 'timestamp': datetime.utcnow()}
+        record = {'result': Binary(zlib.compress(
+            pickle.dumps(result))), 'timestamp': datetime.utcnow()}
         self.db.webpage.update({'_id': url}, {'$set': record}, upsert=True)
+
+
+if __name__ == '__main__':
+    link_crawler('http://example.webscraping.com',
+                 '/places/default/(index|view)', max_depth=-1, cache=MongoCache())
