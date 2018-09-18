@@ -9,7 +9,7 @@ class AlexaCallback:
         self.seed_url = 'http://s3.amazonaws.com/alexa-static/top-1m.csv.zip'
 
     def __call__(self, url, html):
-        if url = self.seed_url:
+        if url == self.seed_url:
             urls = []
             with ZipFile(BytesIO(html)) as zf:
                 csv_filename = zf.namelist()[0]
