@@ -54,7 +54,10 @@ class Downloader:
             opener.add_handler(urllib.request.ProxyHandler(proxy_params))
         try:
             response = opener.open(request)
-            html = response.read().decode()
+            if url.endswith('.zip'):
+                html = response.read()
+            else:
+                html = response.read().decode()
             code = response.code
         except urllib.error.URLError as e:
             print('Download error:', e.reason)
