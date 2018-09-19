@@ -13,7 +13,7 @@ class AlexaCallback:
             urls = []
             with ZipFile(BytesIO(html)) as zf:
                 csv_filename = zf.namelist()[0]
-                for rank, website in csv.reader(StringIO(zf.open(csv_filename))):
+                for rank, website in csv.reader(StringIO(zf.open(csv_filename).read().decode())):
                     urls.append('http://' + website)
                     if len(urls) == self.max_urls:
                         break
