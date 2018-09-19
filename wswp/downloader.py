@@ -57,7 +57,7 @@ class Downloader:
             if url.endswith('.zip'):
                 html = response.read()
             else:
-                html = response.read().decode()
+                html = response.read()
             code = response.code
         except urllib.error.URLError as e:
             print('Download error:', e.reason)
