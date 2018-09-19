@@ -29,6 +29,7 @@ def crawler(seed_url, delay=1, max_depth=2, user_agent='Mozilla/5.0 (Macintosh; 
             html = D(url)
         else:
             print('Blocked by robots.txt:', url)
+            print(user_agent)
             html = None
             sys.exit()
 
