@@ -28,7 +28,8 @@ class AlexaCallback:
                         'slots777.shop', 'mercantilbanco.com', 'alicdn.com', '104.com.tw',
                         'digitaldsp.com', 'namu.wiki', 'subscene.com', 'exhentai.org',
                         'myanimevideo.club', 'accuweather.com', 'kissanime.ru',
-                        'jf71qh5v14.com', 'qihoo.com', 'thewhizmarketing.com']
+                        'jf71qh5v14.com', 'qihoo.com', 'thewhizmarketing.com',
+                        'leboncoin.fr']
             with ZipFile(BytesIO(html)) as zf:
                 csv_filename = zf.namelist()[0]
                 for rank, website in csv.reader(StringIO(zf.open(csv_filename).read().decode())):
