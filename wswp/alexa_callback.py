@@ -32,7 +32,7 @@ class AlexaCallback:
                         'leboncoin.fr', 'gap.tmall.com', 'akamaized.net', 'pixiv.net',
                         'hdfcbank.com', 'sindonews.com', 'bp.blogspot.com',
                         'nextoptim.com', 'cdninstagram.com', 'banvenez.com',
-                        'bestbuy.com']
+                        'bestbuy.com', 'sjtu.edu.cn']
             with ZipFile(BytesIO(html)) as zf:
                 csv_filename = zf.namelist()[0]
                 for rank, website in csv.reader(StringIO(zf.open(csv_filename).read().decode())):
