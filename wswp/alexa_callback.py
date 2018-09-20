@@ -11,10 +11,12 @@ class AlexaCallback:
     def __call__(self, url, html):
         if url == self.seed_url:
             urls = []
+            bad_urls = ['livedoor.biz']
             with ZipFile(BytesIO(html)) as zf:
                 csv_filename = zf.namelist()[0]
                 for rank, website in csv.reader(StringIO(zf.open(csv_filename).read().decode())):
-                    urls.append('http://www.' + website)
+                    if website not in bad_urls:
+                    	urls.append('http://' + website)
                     if len(urls) == self.max_urls:
                         break
         return urls
