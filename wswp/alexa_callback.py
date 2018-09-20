@@ -11,7 +11,7 @@ class AlexaCallback:
     def __call__(self, url, html):
         if url == self.seed_url:
             urls = []
-            bad_urls = ['livedoor.biz']
+            bad_urls = ['livedoor.biz', 'vkuseraudio.net']
             with ZipFile(BytesIO(html)) as zf:
                 csv_filename = zf.namelist()[0]
                 for rank, website in csv.reader(StringIO(zf.open(csv_filename).read().decode())):
