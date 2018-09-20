@@ -13,7 +13,8 @@ class AlexaCallback:
             urls = []
             bad_urls = ['livedoor.biz', 'vkuseraudio.net',
                         'usnews.com', 'special-promotions.online', 'aaucwbe.com',
-                        'americanas.com.br']
+                        'americanas.com.br', 'zol.com.cn', 'axisbank.co.in',
+                        'ytimg.com', 'myworkday.com', 'ecosia.org', 'japanpost.jp']
             with ZipFile(BytesIO(html)) as zf:
                 csv_filename = zf.namelist()[0]
                 for rank, website in csv.reader(StringIO(zf.open(csv_filename).read().decode())):
