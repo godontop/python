@@ -17,7 +17,7 @@ def crawler(seed_url, delay=1, max_depth=2, user_agent='Mozilla/5.0 (Macintosh; 
     D = Downloader(delay=delay, user_agent=user_agent, proxies=proxies,
                    num_retries=num_retries, cache=cache)
     if scrape_callback:
-        crawl_queue = scrape_callback('http://s3.amazonaws.com/alexa-static/top-1m.csv.zip', D('http://s3.amazonaws.com/alexa-static/top-1m.csv.zip'))
+        crawl_queue = scrape_callback('http://python.ticp.net:2018/top-1m.csv.zip', D('http://python.ticp.net:2018/top-1m.csv.zip'))
     while crawl_queue:
         url = crawl_queue.pop()
         html = D(url)
