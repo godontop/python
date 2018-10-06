@@ -36,7 +36,9 @@ def threaded_crawler(seed_url, delay=5, cache=None, scrape_callback=None,
                         print('Error in callback for: {}: {}'.format(url, e))
                     else:
                         for link in links:
+                        	print('origin' + link)
                             link = normalize(seed_url, link)
+                            print('normalized' + link)
                             # check whether already crawled this link
                             if link not in seen:
                                 seen.add(link)
