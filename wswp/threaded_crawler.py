@@ -45,13 +45,13 @@ def threaded_crawler(seed_url, delay=5, cache=None, scrape_callback=None,
 
     # wait for all download threads to finish
     threads = []
-    while threads or crawl_quene:
+    while threads or crawl_queue:
         # the crawl is still active
         for thread in threads:
             if not thread.is_alive():
                 # remove the stopped threads
                 threads.remove(thread)
-        while len(threads) < max_threads and crawl_quene:
+        while len(threads) < max_threads and crawl_queue:
             # can start some more threads
             thread = threading.Thread(target=process_queue)
             # set daemon so main thread can exit when receives ctrl-c
