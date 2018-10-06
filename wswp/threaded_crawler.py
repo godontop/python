@@ -66,5 +66,5 @@ def threaded_crawler(seed_url, delay=5, cache=None, scrape_callback=None,
 def normalize(seed_url, link):
     """Normalize this URL by removing hash and adding domain
     """
-    link, _ = urlib.parse.urldefrag(link)  # remove hash to avoid duplicates
+    link, _ = urllib.parse.urldefrag(link)  # remove hash to avoid duplicates
     return urlib.parse.urljoin(seed_url, link)
