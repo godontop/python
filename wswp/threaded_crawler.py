@@ -32,6 +32,7 @@ def threaded_crawler(seed_url, delay=5, cache=None, scrape_callback=None,
                 if scrape_callback:
                     try:
                         links = scrape_callback(url, html) or []
+                        print(links)
                     except Exception as e:
                         print('Error in callback for: {}: {}'.format(url, e))
                     else:
