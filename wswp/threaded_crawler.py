@@ -67,4 +67,4 @@ def normalize(seed_url, link):
     """Normalize this URL by removing hash and adding domain
     """
     link, _ = urllib.parse.urldefrag(link)  # remove hash to avoid duplicates
-    return urlib.parse.urljoin(seed_url, link)
+    return urllib.parse.urljoin(seed_url, link)
