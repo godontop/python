@@ -63,7 +63,8 @@ class Downloader:
                 html = response.read()
             code = response.code
         except urllib.error.URLError as e:
-            print('Download error:', e.reason)
+            # print the error url, it's useful when using multi threads
+            print('Download error:', url, e.reason)
             html = None
             if num_retries > 0:
                 if hasattr(e, 'code') and 500 <= e.code < 600:
