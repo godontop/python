@@ -1,2 +1,1 @@
-# python
-Python Notebooks
+Python练习仓库
