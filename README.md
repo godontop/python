@@ -1,8 +1,11 @@
-# Python 练习仓库  
-每个 Jupyter Notebook 的第一个 cell 需打印当前时间，系统环境及 Python 版本，正在看的书。  
+# Python 联系仓库
+如果GitHub上的文件加载不出来，可以通过Jupyter nbviewer查看，nbviewer官方网址为：  
+[https://nbviewer.jupyter.org](https://nbviewer.jupyter.org)  
 
-每个 Jupyter Notebook 文件的行数不要超过9549行，且文件大小不宜超过2.1MB，不然的话在github上可能加载不全（对于jupyter notebook 文件最多好像只能加载5557行）。  
+每个Jupyter Notebook文件的第一个cell打印以下内容：  
+* 当前的时间
 
-## Python 3 网络爬虫开发实战  
-### 0003.ipynb  
-第四章  解析库的使用  
+所有修改必须当天提交；
+
+0001.ipynb  
+50.6KB，310行，在nbviewer中可以很快的加载出来。——2020.06.09
