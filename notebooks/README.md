@@ -34,10 +34,11 @@ ipynb文件规则
 
 0007.ipynb  
 开始时间：2020.06.09 11:53:26  
-28421 lines (28421 sloc)  829 KB（Github端，第四次加载出来了）  
+28421 lines (28421 sloc)  829 KB（Github端正常加载）  
 内容：pandas练习  
 
-0008.ipynb
-data: 2021.09.25
-内容：NumPy练习
+0008.ipynb  
+data: 2021.09.25  
+内容：NumPy练习  
+
 
