@@ -28,12 +28,17 @@ ipynb文件规则
 1.35 MB（github端，不显示行数）  
 下次文件最多只能为1.34MB  
 
-【开始】0006.ipynb  
+0006.ipynb  
 开始时间：2020.05.31 08:36  
-8805 lines (8805 sloc)  256 KB（github端，正常加载）  
+11017 lines (11017 sloc)  292 KB（github端，正常加载）  
 
-9.ipynb  
+0007.ipynb  
 开始时间：2020.06.09 11:53:26  
-28421 lines (28421 sloc)  829 KB（Github端，第四次加载出来了）  
+28421 lines (28421 sloc)  829 KB（Github端正常加载）  
 内容：pandas练习  
+
+0008.ipynb  
+data: 2021.09.25  
+内容：NumPy练习  
+
 
