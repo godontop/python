@@ -9,3 +9,6 @@
 
 0001.ipynb  
 303KB，1192行，在nbviewer中可以很快的加载出来，在GitHub中没能加载出来。——2020.06.16
+
+BeautifulSoup 4 练习文件  
+[beautiful_soup.ipynb](https://github.com/godontop/python/blob/master/notebooks/beautiful_soup.ipynb)  
